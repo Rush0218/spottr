@@ -1,20 +1,24 @@
 const { Model, DataTypes } = require('sequelize');
 const User = require('./User');
 const sequelize = require('../config/connection');
+const { Vote } = require('.');
 
 class Post extends Model {
     //will need to put upvote/downvote functionality
     async upvote(userId, postId) {
-        
-        const user = await User.findAll({where: {id = userId}}).then(user => user);
-        this.upvotes++;
-
+        const upvote = await Vote.create({
+            user_id: userId,
+            positive: true,
+            post_id: postId
+        });
+        return upvote;
     }
     async downvote(userId, postId) {
-
-        const user = await User.findAll({where: {id = userId}}).then(user => user);
-
-
+        Vote.create({
+            user_id: userId,
+            positive: false,
+            post_id: postId
+        })
     }
 }
 
@@ -30,17 +34,6 @@ Post.init(
         title: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        
-        upvotes: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
-        downvotes: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
         },
         post_url: {
             type: DataTypes.STRING,
