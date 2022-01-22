@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npm run open && npm run watch",
+    "open": "start http://localhost:3001",
+    "watch": "nodemon server.js",
+    "seed": "node ./db/seed/index.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +32,8 @@
     "mysql2": "^2.3.3",
     "path": "^0.12.7",
     "sequelize": "^6.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.15"
   }
 }
