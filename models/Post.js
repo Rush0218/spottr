@@ -1,8 +1,25 @@
 const { Model, DataTypes } = require('sequelize');
+const User = require('./User');
 const sequelize = require('../config/connection');
+const { Vote } = require('.');
 
 class Post extends Model {
     //will need to put upvote/downvote functionality
+    async upvote(userId, postId) {
+        const upvote = await Vote.create({
+            user_id: userId,
+            positive: true,
+            post_id: postId
+        });
+        return upvote;
+    }
+    async downvote(userId, postId) {
+        Vote.create({
+            user_id: userId,
+            positive: false,
+            post_id: postId
+        })
+    }
 }
 
 // create fields/columns for Post model
