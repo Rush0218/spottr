@@ -36,6 +36,15 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        content: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        postDate: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
         post_url: {
             type: DataTypes.STRING,
             allowNull: false,
