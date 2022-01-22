@@ -14,11 +14,12 @@ class Post extends Model {
         return upvote;
     }
     async downvote(userId, postId) {
-        Vote.create({
+        const downvote = await Vote.create({
             user_id: userId,
             positive: false,
             post_id: postId
-        })
+        });
+        return downvote;
     }
 }
 

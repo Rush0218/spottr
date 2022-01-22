@@ -8,7 +8,7 @@ module.exports = {
         const messageParts = msg.match(/.{1,100}/g);
         messageParts.forEach(message => {
             const time = new Date();
-            const timeStamp = `[${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()} | ${time.toLocaleTimeString('en-US', { hour12: false })}(${time.getMilliseconds().toFixed(3)})] > `;
+            const timeStamp = `[${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()} | ${time.toLocaleTimeString('en-US', { hour12: false })}(${time.getMilliseconds().toPrecision(3)})] > `;
             console.log(timeStamp + message);
         });
         if (obj) {
