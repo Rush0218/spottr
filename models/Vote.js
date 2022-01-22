@@ -18,6 +18,10 @@ Vote.init(
                 key: 'id'
             }
         },
+        positive: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
         post_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
