@@ -1,0 +1,18 @@
+<!--create html for the "homepage" aka how community feed will appear-->
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>
+                <a href="/">Spottr</a>
+            </h1>
+        </header>
+    </div>
+<ol class="post-list">
+  {{#each posts as |post|}}
+  <li>
+    {{> post-info post }}
+  </li>
+  {{/each}}
+</ol>
+</body>
