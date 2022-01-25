@@ -1,9 +1,10 @@
 const userID = document.querySelector('').value;
-const postID = (elementString) => {
-    document
-}
 
-const downvote = async (userId, postId) => {
+
+const downvote = async (userId) => {
+    const postID = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+    ];
     const response = await fetch('./api/posts/downvote', {
         method: 'POST',
         headers: { 'Content Type': 'application/json' },
