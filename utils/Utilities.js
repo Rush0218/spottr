@@ -1,8 +1,13 @@
 module.exports = {
-    formatCurrency: (moneyString) => {
+    format_url: (urlString) => {
         let retVal = '';
 
-        return retVal
+        return urlString;
+    },
+    format_plural: (urlString) => {
+        let retVal = '';
+
+        return urlString + 's';
     },
     Log: (msg, obj) => {
         const messageParts = msg.match(/.{1,100}/g);

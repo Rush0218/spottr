@@ -1,7 +1,7 @@
-* {
+/** {
   box-sizing: border-box;
   background-color: #333;
-}
+}*/
 
 body,
 html {
@@ -10,6 +10,7 @@ html {
   margin: 0;
   font-family: sans-serif;
   color: rgb(212, 211, 211);
+  background-color: #3f3f3f;
 }
 
 header {
@@ -44,8 +45,40 @@ button:hover {
 }
 
 .post-list {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.1), 
+        rgba(0, 0, 0, 0.5)
+    );
+    padding: 10px;
+}
+
+.post-item {
+    margin-bottom: 10px;
+    border-radius: 16px;
+    height: max-content;
+    overflow: hidden;
+    background-color: #7d7d7d;
+}
+
+.post {
+    margin-bottom: 2%;
+    line-height: 150%;
+}
+.post .title{
+    background-color: #505050;
+    padding: 5px;
+}
+
+.post .title a {
+    font-size: 1.3rem;
+    text-decoration: none;
+
 }
 
 textarea,
@@ -126,16 +159,6 @@ main {
   background-color: #ff643d;
 }
 
-.post {
-  margin-bottom: 2%;
-  line-height: 150%;
-}
-
-.post .title span {
-  font-style: italic;
-  font-size: 90%;
-  color: #7d7d7d;
-}
 
 .edit-link {
   display: block;
