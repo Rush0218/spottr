@@ -1,4 +1,8 @@
 <!--create html to show how a single post will appear when clicked on, should include the post, comments and text area to add a new comment-->
+<header>
+  <h1>Spottr</h1>
+</header>
+
 {{> post-info post}}
 
 {{#if loggedIn}}
@@ -10,6 +14,7 @@
   <div>
     <button type="submit">add comment</button>
     <button type="button" class="upvote-btn">upvote</button>
+    <button type="button" class='downvote-btn'>downvote</button>
   </div>
 </form>
 {{/if}}
