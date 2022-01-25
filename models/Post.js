@@ -14,11 +14,12 @@ class Post extends Model {
         return upvote;
     }
     async downvote(userId, postId) {
-        Vote.create({
+        const downvote = await Vote.create({
             user_id: userId,
             positive: false,
             post_id: postId
-        })
+        });
+        return downvote;
     }
 }
 
@@ -35,12 +36,17 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        post_url: {
+        body: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 isURL: true
             }
+        },
+        created_at: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
         user_id: {
             type: DataTypes.INTEGER,

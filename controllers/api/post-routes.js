@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
-            'post_url',
             'title',
+            'body',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
@@ -46,8 +46,8 @@ router.get('/:id', (req, res) => {
         },
         attributes: [
             'id',
-            'post_url',
             'title',
+            'body',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
@@ -92,7 +92,15 @@ router.put('/upvote', withAuth, (req, res) => {
     const userId = req.session.user_id;
     if (req.session) {
         // pass session id along with all destructured properties on req.body
-        Post.downvote(userId, postId)
+        Vote.findAll({ where: { user_id: userId, post_id: postId } })
+            .then(results => {
+                for (let i = 0; i < results.length; i++) {
+                    const result = results[i];
+                    Vote.destroy({ where: { id: result.id } });
+                }
+            });
+
+        Post.upvote(userId, postId)
             .then(updatedVoteData => res.status(200).json(updatedVoteData))
             .catch(err => {
                 console.log(err);

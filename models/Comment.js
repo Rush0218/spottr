@@ -19,6 +19,11 @@ Comment.init(
                 len: [1]
             }
         },
+        created_at: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
