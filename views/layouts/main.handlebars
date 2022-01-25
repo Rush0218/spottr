@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-black-ter has-text-white">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spottr</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper section">
         <header>
-            <h1>
+            <h1 class="title">
                 <a href="/">Spottr</a>
             </h1>
             <nav>
@@ -32,9 +32,9 @@
         </footer>
     </div>
     {{#if loggedIn}}
-    <script src="/javascript/logout.js"></script>
+    <script src="/javascript/logout.js" class="section"></script>
     {{else}}
-    <script src="/javascript/login.js"></script>
+    <script src="/javascript/login.js" class="section"></script>
     {{/if}}
 </body>
 

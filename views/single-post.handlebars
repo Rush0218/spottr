@@ -3,7 +3,7 @@
 {{> post-info post}}
 
 {{#if loggedIn}}
-<form class="comment-form">
+<form class="comment-form section">
   <div>
     <textarea name="comment-body"></textarea>
   </div>
@@ -19,6 +19,6 @@
 {{> comments post.comments}}
 
 {{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
-<script src="/javascript/upvote.js"></script>
+<script src="/javascript/comment.js" class="section"></script>
+<script src="/javascript/upvote.js" class="section"></script>
 {{/if}}
