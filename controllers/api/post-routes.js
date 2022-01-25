@@ -98,9 +98,9 @@ router.put('/upvote', withAuth, (req, res) => {
                 console.log(err);
                 res.status(400).json(err);
             });
-
     }
 });
+
 router.put('/downvote', withAuth, (req, res) => {
     // make sure the session exists first
     const postId = req.body.post_id;
