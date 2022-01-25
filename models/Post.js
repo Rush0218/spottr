@@ -43,6 +43,13 @@ Post.init(
                 isURL: true
             }
         },
+        post_url: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isURL: true
+            }
+        },
         created_at: {
             type: DataTypes.DATEONLY,
             allowNull: false,

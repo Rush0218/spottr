@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
             'id',
             'title',
             'body',
+            'post_url',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -32,6 +32,23 @@ router.get('/', (req, res) => {
             }
         ]
     })
+        .then(dbPostData => {
+            const posts = [];
+            for (var i = 0; i < dbPostData.length; i++) {
+                const post = dbPostData[i];
+                const postVotes = Vote.findAll({
+                    where: {
+                        post_id: post.id
+                    }
+                })
+                    .then(votes => {
+                        const upvotes = votes.filter(vote => vote.positive)
+                        const downvotes = votes.filter(vote => vote.positive)
+                        return { upvotes: upvotes, downvotes: downvotes }
+                    });
+                posts.push(postVotes, posts)
+            }
+        })
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {
             console.log(err);
@@ -48,6 +65,7 @@ router.get('/:id', (req, res) => {
             'id',
             'title',
             'body',
+            'post_url',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],

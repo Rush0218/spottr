@@ -7,8 +7,9 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
-            'post_url',
             'title',
+            'body',
+            'post_url',
             'created_at',
             [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
@@ -57,10 +58,10 @@ router.get('/post/:id', (req, res) => {
         },
         attributes: [
             'id',
-            'post_url',
             'title',
+            'body',
+            'post_url',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         include: [
             {
@@ -77,6 +78,23 @@ router.get('/post/:id', (req, res) => {
             }
         ]
     })
+        .then(dbPostData => {
+            const posts = [];
+            for (var i = 0; i < dbPostData.length; i++) {
+                const post = dbPostData[i];
+                const postVotes = Vote.findAll({
+                    where: {
+                        post_id: post.id
+                    }
+                })
+                    .then(votes => {
+                        const upvotes = votes.filter(vote => vote.positive)
+                        const downvotes = votes.filter(vote => vote.positive)
+                        return { upvotes: upvotes, downvotes: downvotes }
+                    });
+                posts.push(postVotes, posts)
+            }
+        })
         .then(dbPostData => {
             if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });

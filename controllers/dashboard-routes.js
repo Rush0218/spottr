@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Post, User, Comment } = require('../models');
+const { Post, User, Comment, Vote } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
@@ -11,10 +11,10 @@ router.get('/', withAuth, (req, res) => {
         },
         attributes: [
             'id',
-            'post_url',
             'title',
+            'body',
+            'post_url',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         include: [
             {
@@ -30,6 +30,22 @@ router.get('/', withAuth, (req, res) => {
                 attributes: ['username']
             }
         ]
+    }).then(dbPostData => {
+        const posts = [];
+        for (var i = 0; i < dbPostData.length; i++) {
+            const post = dbPostData[i];
+            const postVotes = Vote.findAll({
+                where: {
+                    post_id: post.id
+                }
+            })
+                .then(votes => {
+                    const upvotes = votes.filter(vote => vote.positive)
+                    const downvotes = votes.filter(vote => vote.positive)
+                    return { upvotes: upvotes, downvotes: downvotes }
+                });
+            posts.push(postVotes, posts)
+        }
     })
         .then(dbPostData => {
             // serialize data before passing to template
@@ -47,10 +63,10 @@ router.get('/edit/:id', withAuth, (req, res) => {
     Post.findByPk(req.params.id, {
         attributes: [
             'id',
-            'post_url',
             'title',
+            'body',
+            'post_url',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         include: [
             {
@@ -67,6 +83,23 @@ router.get('/edit/:id', withAuth, (req, res) => {
             }
         ]
     })
+        .then(dbPostData => {
+            const posts = [];
+            for (var i = 0; i < dbPostData.length; i++) {
+                const post = dbPostData[i];
+                const postVotes = Vote.findAll({
+                    where: {
+                        post_id: post.id
+                    }
+                })
+                    .then(votes => {
+                        const upvotes = votes.filter(vote => vote.positive)
+                        const downvotes = votes.filter(vote => vote.positive)
+                        return { upvotes: upvotes, downvotes: downvotes }
+                    });
+                posts.push(postVotes, posts)
+            }
+        })
         .then(dbPostData => {
             if (dbPostData) {
                 const post = dbPostData.get({ plain: true });
