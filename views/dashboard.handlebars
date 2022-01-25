@@ -1,40 +1,41 @@
 <!--create html for how the profile/dashboard will appear (it should include all of the users posts, a new post creator)-->
 <section>
-  <h2>Create New Post</h2>
 
-  <form class="new-post-form">
-    <div>
-      <label for="post-title">Title</label>
-      <input type="text" id="post-title" name="post-title" />
-    </div>
-    <!--- added workout type --->
-      <label for="workout-type">Select a Workout Type:</label>
-      <select id="workout-type" name="workout-type">
-        <option value="mobility-flexibility">Mobility/Flexibility</option>
-        <option value="endurance">Endurance</option>
-        <option value="balance-training">Balance Training</option>
-        <option value="strength-building">Strength Building</option>
-        <option value-"aerobic">Aerobic</option>
-      </select>
-    <div>
-      <label for="post-url">Link</label>
-      <input id="post-url" name="post-url" />
-    </div>
-    <button type="submit" class="btn">Create</button>
-  </form>
+    <form class="new-post-form">
+        <h2>Create New Post</h2>
+        <label for="post-title">Title</label>
+        <input type="text" id="post-title" name="post-title" />
+        <!--- added workout type --->
+        <label for="workout-type">Select a Workout Type:</label>
+        <select id="workout-type" name="workout-type">
+            <option value="mobility-flexibility">Mobility/Flexibility</option>
+            <option value="endurance">Endurance</option>
+            <option value="balance-training">Balance Training</option>
+            <option value="strength-building">Strength Building</option>
+            <option value-"aerobic">Aerobic</option>
+        </select>
+        <label for="post-url">Link</label>
+        <input id="post-url" name="post-url" />
+        <label for="post-content">Body: </label>
+        <textarea id="post-content" placeholder="Enter post content here"></textarea>
+        <button type="submit" class="btn" id="submitPost">Create</button>
+    </form>
 </section>
 
 {{#if posts.length}}
 <section>
-  <h2>Your Posts</h2>
-  <ol>
-    {{#each posts as |post|}}
-    <li>
-      {{> post-info post}}
-      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
-    </li>
-    {{/each}}
-  </ol>
+    <h2>Your Posts</h2>
+    <ol>
+        {{#each posts as |post|}}
+        <li>
+            {{>post-info post}}
+            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+        </li>
+        {{/each}}
+
+    </ol>
+    <script src="/javascript/upvote.js"></script>
+    <script src="/javascript/downvote.js"></script>
 </section>
 {{/if}}
 

@@ -76,9 +76,28 @@ router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         post_url: req.body.post_url,
+        body: req.body.body,
         user_id: req.session.user_id
     })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => {
+            const posts = [];
+            for (let index = 0; index < array.length; index++) {
+                const post = array[index];
+                const postVotes = Vote.findAll({
+                    where: {
+                        post_id: post.id
+                    }
+                }).then(votes => {
+                    const upvotes = votes.filter(vote => vote.positive)
+                    const downvotes = votes.filter(vote => !vote.positive)
+                    return { upvotes: upvotes, downvotes: downvotes }
+                });
+                posts.push({ post: post, votes: postVotes })
+            }
+            res.json(dbPostData)
+
+
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -86,10 +105,10 @@ router.post('/', withAuth, (req, res) => {
 });
 
 // PUT /api/posts/upvote
-router.put('/upvote', withAuth, (req, res) => {
+router.put('/upvote', (req, res) => {
     // make sure the session exists first
     const postId = req.body.post_id;
-    const userId = req.session.user_id;
+    const userId = 1;//req.session.user_id;
     if (req.session) {
         // pass session id along with all destructured properties on req.body
         Vote.findAll({ where: { user_id: userId, post_id: postId } })
@@ -109,6 +128,7 @@ router.put('/upvote', withAuth, (req, res) => {
 
     }
 });
+
 router.put('/downvote', withAuth, (req, res) => {
     // make sure the session exists first
     const postId = req.body.post_id;

@@ -13,6 +13,14 @@ html {
   background-color: #3f3f3f;
 }
 
+select, input {
+    min-height: 2rem;
+    color: black;
+    border-radius: 4px;
+    min-width: 300px;
+}
+
+
 header {
   font-size: 48px;
   color: white;
@@ -166,21 +174,26 @@ main {
 }
 
 .upvote-btn {
-  background-color: #f0db25;
+  color: #09ff00;
   transition: background-color 0.1s;
 }
 
 .upvote-btn:hover {
-  background-color: #f0db25;
+  color: #258318;
+  cursor: pointer;
+}
+
+.upvoted {
+    color: #0f0;
 }
 
 .downvote-btn {
-  background-color: #a81edf;
+  color: #df1e1e;
   transition: background-color 0.1s;
 }
 
 .downvote-btn:hover {
-  background-color: #a81edf;
+  color: #a01818;
 }
 
 .comment-form {
@@ -202,6 +215,15 @@ main {
   opacity: 0.6;
 }
 
+.new-post-form {
+    max-width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20%;
+    margin-right: auto;
+}
+
 .new-post-form input {
   width: 300px;
 }
@@ -216,4 +238,8 @@ footer {
   justify-content: center;
   padding: 1%;
   font-size: 110%;
+}
+
+.modal-card-body{
+    color: black;
 }

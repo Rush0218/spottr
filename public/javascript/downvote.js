@@ -1,6 +1,3 @@
-const userID = document.querySelector('').value;
-
-
 const downvote = async (userId) => {
     const postID = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1

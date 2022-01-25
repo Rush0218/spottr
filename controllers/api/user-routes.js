@@ -65,48 +65,42 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-        .then(dbUserData => {
+        .then((dbUserData) => {
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.json(dbUserData);
+                res.status(200).json(dbUserData);
             });
         })
-        .catch(err => {
+        .catch((err) => {
             console.log(err);
             res.status(500).json(err);
-        })
+        });
 });
 
 router.post('/login', (req, res) => {
-    User.findOne({
-        where: {
-            email: req.body.email
-        }
-    }).then(dbUserData => {
-        if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that email address!' });
-            return;
-        }
+    User.findOne({ where: { username: req.body.username } })
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(400).json({ message: 'No user with that username!' });
+                return;
+            }
+            const validPassword = dbUserData.checkPassword(req.body.password);
+            if (!validPassword) {
+                res.status(400).json({ message: 'Incorrect password!' });
+                return;
+            }
+            req.session.save(() => {
+                // declare session variables
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
 
-        const validPassword = dbUserData.checkPassword(req.body.password);
-
-        if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password!' });
-            return;
-        }
-
-        req.session.save(() => {
-            // declare session variables
-            req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
-            req.session.loggedIn = true;
-
-            res.json({ user: dbUserData, message: 'You are now logged in!' });
+                res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
+            });
         });
-    });
 });
 
 router.post('/logout', (req, res) => {
@@ -116,7 +110,7 @@ router.post('/logout', (req, res) => {
         });
     }
     else {
-        res.status(404).end();
+        res.status(400).end();
     }
 });
 

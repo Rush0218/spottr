@@ -1,13 +1,9 @@
 module.exports = {
     format_url: (urlString) => {
-        let retVal = '';
-
         return urlString;
     },
-    format_plural: (urlString) => {
-        let retVal = '';
-
-        return urlString + 's';
+    format_plural: (formatString, length) => {
+        return formatString + (length > 0) ? + 's' : '';
     },
     Log: (msg, obj) => {
         const messageParts = msg.match(/.{1,100}/g);
