@@ -10,7 +10,7 @@ const seedAll = async () => {
         await seedUsers();
         await seedPosts();
         await seedComments();
-        await seedVotes();
+        //await seedVotes();
     } catch (err) {
         console.log('err', err);
     } finally {

@@ -3,20 +3,21 @@ async function newFormHandler(event) {
 
     const title = document.querySelector('#post-title').value;
     const post_url = document.querySelector('#post-url').value;
-    const body = document.querySelector('#post-content').value;
-
+    const content = document.querySelector('#post-content').value;
+    const workoutType = document.querySelector('#workout-type').value;
+    console.log(content);
     const response = await fetch(`/api/posts`, {
         method: 'POST',
         body: JSON.stringify({
             title,
             post_url,
-            body
+            content
         }),
         headers: {
             'Content-Type': 'application/json'
         }
     });
-    console.log('response', response);
+    //console.log('response', response);
     if (response.ok) {
         document.location.replace('/dashboard');
     } else {
@@ -29,11 +30,11 @@ const displayMessage = (title, message) => {
     const modalTitle = document.querySelector('.modal-card-title');
     const modalText = document.querySelector('.modal-card-body');
     const modal = document.querySelector('.modal');
-    console.log('modalTitle', modalTitle);
-    console.log('modalText', modalText);
-    console.log('modal', modal);
-    console.log('title', title);
-    console.log('message', message);
+    //console.log('modalTitle', modalTitle);
+    //console.log('modalText', modalText);
+    //console.log('modal', modal);
+    //console.log('title', title);
+    //console.log('message', message);
 
     modalTitle.textContent = title;
     modalText.innerHTML = message;
@@ -42,7 +43,7 @@ const displayMessage = (title, message) => {
 
 const toggleModal = () => {
     const modal = document.querySelector('.modal');
-    console.log(modal);
+    //console.log(modal);
     const modalClassList = [];
     modal.classList.forEach(element => modalClassList.push(element));
     if (modalClassList.indexOf("is-active") >= 0) {

@@ -1,44 +1,68 @@
 <!--create html to show how it would appear to edit an old post, should include the post itself along with any comments-->
+<a href="/dashboard"> &larr; Back to dashboard</a>
 
 <article>
-                <a href="/dashboard"> &larr; Back to dashboard</a>
-                <h2 class="title has-text-white">
-                  Edit Post
-                </h2>
-                <form class="edit-post-form has-text-white">
-                  <div class="box has-background-black">
-                    <input name="post-title" type="text" value="{{post.title}}" class="" />
-                    <br>
-                    <span>({{format_url post.post_url}})</span>
-                    
-                  </div>
-                  <div class="box has-background-black">
-                      <section>
-                         {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}} 
-                      </section>
-                      <section>
-                        <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>  
-                      </section>
-                    
-                  </div>
-                  <button type="submit" class="button is-small has-background-info"><strong>save post</strong></button>
-                  <button type="button" class="button is-small has-background-info"><strong>delete post</strong></button>
-                </form>
-              </article>
-              <br>
-              
-              <div class="box has-background-black">
-                <h3 class="title is-size-5 has-text-white">Add Comment</h3>
-                <form class="comment-form">
-                <div>
-                  <textarea name="comment-body" class="textarea"></textarea>
-                </div>
-              
-                <div>
-                  <button type="submit" class="button is-small has-background-info"><strong>add comment</strong></button>
-                </div>
-              </form>  
-              </div>
+
+    <form class="new-post-form section has-background-black" style="min-width: 100%;">
+        <h2 class="title has-text-white">
+            Edit Post
+        </h2>
+        <label for="post-title">Title</label>
+        <input type="text" id="post-title" name="post-title" class="input" style="width: 100%" value="{{post.title}}" />
+        <!--- added workout type --->
+        <br>
+
+        <label for="workout-type">Select a Workout Type:</label>
+        <select id="workout-type" name="workout-type" class="dropdown input">
+            <option value="mobility-flexibility">Mobility/Flexibility</option>
+            <option value="endurance">Endurance</option>
+            <option value="balance-training">Balance Training</option>
+            <option value="strength-building">Strength Building</option>
+            <option value="aerobic">Aerobic</option>
+        </select>
+
+        <br>
+        <label for="post-url">Link</label>
+        <input type="text" id="post-url" name="post-url" class="input" style="width: 100%" value="{{post.post_url}}" />
+        <br>
+
+        <label for="post-content">Your Post Content</label>
+        <textarea id="post-content" class="textarea" rows="10">{{post.content}}</textarea>
+        <br>
+        <div class="box has-background-black has-text-white">
+            <section>
+                post by you on {{format_date post.createdAt}}
+            </section>
+            <br />
+            <section>
+                <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment"
+                    post.comments.length}}</a>
+            </section>
+
+        </div>
+        <button type="submit" class="button is-small has-background-info">
+            <strong>save post</strong>
+        </button>
+        <button type="button" class="button is-small has-background-info">
+            <strong>delete post</strong>
+        </button>
+    </form>
+</article>
+<br>
+
+
+<div class="box has-background-black">
+    <h3 class="title is-size-5 has-text-white">Add Comment</h3>
+    <form class="comment-form">
+        <div>
+            <textarea name="comment-body" class="textarea"></textarea>
+        </div>
+
+        <div>
+            <button type="submit" class="button is-small has-background-info"><strong>add comment</strong></button>
+        </div>
+    </form>
+</div>
 
 {{> comments post.comments}}
 

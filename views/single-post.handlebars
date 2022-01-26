@@ -1,24 +1,26 @@
 <!--create html to show how a single post will appear when clicked on, should include the post, comments and text area to add a new comment-->
+<div class="has-background-grey box">
+    {{> post-info post}}
+</div>
 
-{{> post-info post}}
-
-{{#if loggedIn}}
-<form class=" text-area">
-            <div>
-              <textarea name="comment-body" class="textarea rows-10"></textarea>
-            </div>
-          
-            <div>
-              <button type="submit" class="button is-small has-background-info"><strong>add comment</strong></button>
-              <button type="button" class="upvote-btn button is-small is-rounded is-outlined has-background-warning"><strong>upvote</strong></button>
-              <button type="button" class='downvote-btn button is-small is-rounded is-outlined has-background-danger'><strong>downvote</strong></button>
-            </div>
-          </form>
-{{/if}}
-
-{{> comments post.comments}}
+{{>comments post.comments}}
 
 {{#if loggedIn}}
-<script src="/javascript/comment.js" class="section"></script>
-<script src="/javascript/upvote.js" class="section"></script>
+<form class="text-area has-background-black" style="padding: 1rem; margin: 1rem auto">
+    <div>
+        <textarea name="comment-body" class="textarea rows-10"></textarea>
+    </div>
+    <div>
+        <button type="button" id="btnComment" class="button is-small has-background-info">
+            <strong>add comment</strong>
+        </button>
+        <!--button type=" button" class="upvote-btn button is-small is-rounded is-outlined has-background-warning">
+            <strong>upvote</strong>
+        </button>
+        <button type="button" class='downvote-btn button is-small is-rounded is-outlined has-background-danger'>
+            <strong>downvote</strong>
+            </button-->
+    </div>
+</form>
+<script src="/javascript/comments.js" class="section"></script>
 {{/if}}

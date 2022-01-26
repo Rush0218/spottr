@@ -9,7 +9,7 @@ const { Log } = require('../../utils/Utilities');
 router.get('/', (req, res) => {
     Post.findAll({
         order: [['created_at', 'DESC']],
-        include: [{ model: Comment, include: { model: User } }, { model: User, }]
+        include: [{ model: Comment, include: { model: User } }, { model: User }]
     })
         .then(dbPostData => {
             res.json(dbPostData);
@@ -22,15 +22,8 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: [
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
+        where: { id: req.params.id },
+        include: [{ model: User }]
     })
         .then(dbPostData => {
             if (!dbPostData) {
@@ -50,7 +43,7 @@ router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         post_url: req.body.post_url,
-        body: req.body.body,
+        content: req.body.content,
         user_id: req.session.user_id
     })
         .then(dbPostData => res.json(dbPostData))

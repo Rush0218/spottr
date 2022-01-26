@@ -4,19 +4,19 @@ const postdata =
     [
         {
             "title": "I made Facebook",
-            "body": "also lizards are cool",
+            "content": "also lizards are cool",
             "post_url": "",
             "user_id": 2
         },
         {
             "title": "Travelling",
-            "body": "I've literally travelled the world for several years now, thanks to Myspace being bought out a long ass time ago lol",
+            "content": "I've literally travelled the world for several years now, thanks to Myspace being bought out a long ass time ago lol",
             "post_url": "",
             "user_id": 1
         },
         {
             "title": "Music, anyone?",
-            "body": "I love listening to music",
+            "content": "I love listening to music",
             "post_url": "",
             "user_id": 3
         }

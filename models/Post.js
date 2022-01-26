@@ -37,7 +37,7 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        body: {
+        content: {
             type: DataTypes.TEXT,
             allowNull: false,
             defaultValue: ''

@@ -1,13 +1,12 @@
 <!--create partial(html) for how comments will appear-->
 <div class="box has-text-white has-background-black">
     {{#each this}}
-  <section class="box has-background-black-ter has-text-white">
-      <div class="meta box has-background-black has-text-white">
-        {{user.username}} on {{format_date created_at}}
-      </div>
-      <div class="text box has-background-black has-text-white">
-        {{comment_text}}
-      </div>
-  </section>
-  {{/each}}
+    {{log this}}
+    <section class="box has-background-black-ter has-text-white">
+        <span style="float: right;">
+            > {{user.username}} on {{format_date createdAt}}
+        </span>
+        <span style="word-wrap: break-word; text-align: justify;">{{comment_text}}</span>
+    </section>
+    {{/each}}
 </div>

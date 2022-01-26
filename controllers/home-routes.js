@@ -49,7 +49,7 @@ router.get('/post/:id', (req, res) => {
                 include: { model: User },
                 order: [['created_at', 'DESC']],
             },
-            { model: User, attributes: ['username'] }
+            { model: User }
         ]
     })
         .then(dbPostData => {

@@ -5,7 +5,8 @@
 
 body,
 html {
-  height: 100%;
+  min-height: 100%;
+  min-width: 80%;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
@@ -13,6 +14,9 @@ html {
   background-color: #3f3f3f;
 }
 
+ul {
+    list-style: none;
+}
 select, input {
     min-height: 2rem;
     color: black;
@@ -67,7 +71,7 @@ button:hover {
 }
 
 .post-item {
-    margin-bottom: 10px;
+    margin: 1rem 0;
     border-radius: 16px;
     height: max-content;
     overflow: hidden;
@@ -243,3 +247,20 @@ footer {
 .modal-card-body{
     color: black;
 }
+
+.section form {
+    background-color: #7d7d7d;
+    border-radius: 16px;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50rem;
+}
+
+.section form div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
