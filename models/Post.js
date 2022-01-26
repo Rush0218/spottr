@@ -42,6 +42,10 @@ Post.init(
             allowNull: false,
             defaultValue: ''
         },
+        workout_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         postDate: {
             type: DataTypes.DATEONLY,
             allowNull: false,

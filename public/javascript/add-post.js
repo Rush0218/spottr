@@ -4,14 +4,15 @@ async function newFormHandler(event) {
     const title = document.querySelector('#post-title').value;
     const post_url = document.querySelector('#post-url').value;
     const content = document.querySelector('#post-content').value;
-    const workoutType = document.querySelector('#workout-type').value;
-    console.log(content);
+    const workout_type = document.querySelector('#workout-type').value;
+    console.log("workout_type", workout_type);
     const response = await fetch(`/api/posts`, {
         method: 'POST',
         body: JSON.stringify({
             title,
             post_url,
-            content
+            content,
+            workout_type
         }),
         headers: {
             'Content-Type': 'application/json'

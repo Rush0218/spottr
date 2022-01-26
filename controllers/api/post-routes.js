@@ -44,6 +44,7 @@ router.post('/', withAuth, (req, res) => {
         title: req.body.title,
         post_url: req.body.post_url,
         content: req.body.content,
+        workout_type: req.body.workout_type,
         user_id: req.session.user_id
     })
         .then(dbPostData => res.json(dbPostData))
