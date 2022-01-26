@@ -3,17 +3,17 @@
 {{> post-info post}}
 
 {{#if loggedIn}}
-<form class="comment-form section">
-  <div>
-    <textarea name="comment-body"></textarea>
-  </div>
-
-  <div>
-    <button type="submit">add comment</button>
-    <button type="button" class="upvote-btn">upvote</button>
-    <button type="button" class='downvote-btn'>downvote</button>
-  </div>
-</form>
+<form class=" text-area">
+            <div>
+              <textarea name="comment-body" class="textarea rows-10"></textarea>
+            </div>
+          
+            <div>
+              <button type="submit" class="button is-small has-background-info"><strong>add comment</strong></button>
+              <button type="button" class="upvote-btn button is-small is-rounded is-outlined has-background-warning"><strong>upvote</strong></button>
+              <button type="button" class='downvote-btn button is-small is-rounded is-outlined has-background-danger'><strong>downvote</strong></button>
+            </div>
+          </form>
 {{/if}}
 
 {{> comments post.comments}}
