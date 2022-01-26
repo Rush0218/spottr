@@ -97,16 +97,7 @@ router.put('/downvote', withAuth, (req, res) => {
 });
 */
 router.put('/:id', withAuth, (req, res) => {
-    Post.update(
-        {
-            title: req.body.title
-        },
-        {
-            where: {
-                id: req.params.id
-            }
-        }
-    )
+    Post.update(req.body, { where: { id: req.params.id } })
         .then(dbPostData => {
             if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });
@@ -121,11 +112,7 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 router.delete('/:id', withAuth, (req, res) => {
-    Post.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+    Post.destroy({ where: { id: req.params.id } })
         .then(dbPostData => {
             if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });

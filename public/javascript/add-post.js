@@ -17,14 +17,12 @@ async function newFormHandler(event) {
             'Content-Type': 'application/json'
         }
     });
-    //console.log('response', response);
     if (response.ok) {
         document.location.replace('/dashboard');
     } else {
         displayMessage('Post Failed', 'Try again in a few minutes');
     }
 }
-
 
 const displayMessage = (title, message) => {
     const modalTitle = document.querySelector('.modal-card-title');
