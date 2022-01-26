@@ -1,11 +1,11 @@
 <!--create partial(html) for how posts will appear-->
 <article class="post section">
-    <div class="title">
-        <a href="/post/{{id}}" target="_blank">{{title}}</a>
+    <div class="title has-text-white">
+        <a href="/post/{{id}}" target="_blank" class="has-text-white">{{title}}</a>
     </div>
-    <div class="meta">
+    <div class="meta box has-background-black has-text-white">
         {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on {{format_date created_at}}
-        |
+        <br>
         <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
     </div>
 </article>
