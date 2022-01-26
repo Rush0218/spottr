@@ -1,28 +1,48 @@
 <!--create html for how the profile/dashboard will appear (it should include all of the users posts, a new post creator)-->
 <section>
-  <h2>Create New Post</h2>
-
-  <form class="new-post-form">
-    <div>
-      <label for="post-title">Title</label>
-      <input type="text" id="post-title" name="post-title" />
-    </div>
-    <!--- added workout type --->
-      <label for="workout-type">Select a Workout Type:</label>
-      <select id="workout-type" name="workout-type" class="dropdown">
-        <option value="mobility-flexibility">Mobility/Flexibility</option>
-        <option value="endurance">Endurance</option>
-        <option value="balance-training">Balance Training</option>
-        <option value="strength-building">Strength Building</option>
-        <option value="aerobic">Aerobic</option>
-      </select>
-    <div>
-      <label for="post-url">Link</label>
-      <input id="post-url" name="post-url" />
-    </div>
-    <button type="submit" class="btn">Create</button>
-  </form>
-</section>
+    <h2 class="title section has-text-white">Create New Post</h2>
+  
+    <div class="section has-text-white">
+        <form class="new-post-form section is-widescreen has-background-black">
+            
+            <div class="columns">
+                <div class="column">
+                    <label for="post-title" class="">Title</label>
+                    <br>
+                    <input type="text" id="post-title" name="post-title" class="is-widescreen"/>
+                  </div>
+                  <!--- added workout type --->
+                  <div class="column">
+                    <label for="workout-type">Select a Workout Type:</label>
+                    <br>
+                    <select id="workout-type" name="workout-type" class="dropdown">
+                      <option value="mobility-flexibility">Mobility/Flexibility</option>
+                      <option value="endurance">Endurance</option>
+                      <option value="balance-training">Balance Training</option>
+                      <option value="strength-building">Strength Building</option>
+                      <option value="aerobic">Aerobic</option>
+                    </select> 
+                  </div>
+            </div>
+           
+            <div class="columns">
+                <div class="column">
+                <label for="post-url">Link</label>
+                <input id="post-url" name="post-url" class=""/>
+                </div>
+            </div> 
+            <div class="columns">
+                <div class="column">
+                <label for="post-content">Your Post Content</label>
+                <textarea class="textarea" placeholder="" rows="10"></textarea>
+            </div>
+            </div>
+            
+            <button type="submit" class="button is-small has-background-info"><strong>Publish</strong></button>
+                  
+          </form>
+    </div>  
+  </section>
 
 {{#if posts.length}}
 <section>
