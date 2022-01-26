@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "npm run open && npm run watch",
+        "start": "node server.js",
         "open": "start http://localhost:3001",
         "watch": "nodemon server.js",
         "seed": "node ./db/seeds/index.js"
