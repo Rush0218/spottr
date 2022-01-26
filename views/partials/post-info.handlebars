@@ -2,14 +2,13 @@
 <article class="post section">
     <div class="title has-text-white"
         style="display: flex; justify-content: space-between; align-content: center; min-height: 3rem; padding: 1rem">
-        <a href="/post/{{id}}" target="_blank" class="has-text-white">{{title}}</a>
+        <a href="/post/{{id}}" target="_blank" class="has-text-white is-outlined">{{title}}</a>
         <a href="{{post_url}}" target="_blank" class="has-text-white">{{post_url}}</a>
     </div>
-    <div class="has-text-white content has-background-dark" style="min-height: 6rem; padding: 1rem; display: block;">
-        <p style="float: right;"> > {{ workout_type }}</p>
-        <p>{{ content }}</p>
+    <div class="has-text-white content has-background-grey-dark" style="min-height: 6rem; padding: 1rem; display: block;">
+        {{ content }}
     </div>
-    <div class="meta box has-background-black has-text-white" style="text-align: end;">
+    <div class="meta box has-background-grey-darker has-text-white" style="text-align: end;">
         <!--{{vote_count}}  {{format_plural "point" vote_count}} -->
         post by {{user.username}} on {{format_date postDate}}
         <br>
