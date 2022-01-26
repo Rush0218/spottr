@@ -16,11 +16,6 @@ const userdata =
             "username": "Michael Birch",
             "password": "hunter42",
             "email": "mike@bebo.com"
-        },
-        {
-            "username": "GameGuyBeardMan",
-            "password": "testing8",
-            "email": "email@email.com"
         }
     ];
 

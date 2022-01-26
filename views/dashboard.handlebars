@@ -33,9 +33,9 @@
 
         </form>
     </div>
+    {{#if posts.length}}
     <div class="section has-background-black">
         <div class="section has-background-grey has-text-white">
-            {{#if posts.length}}
             <h2 class="title has-text-white ">Your Posts</h2>
             <ul>
                 {{#each posts as |post|}}
@@ -45,8 +45,8 @@
                 </li>
                 {{/each}}
             </ul>
-            {{/if}}
         </div>
     </div>
+    {{/if}}
     <script src="/javascript/add-post.js"></script>
 </div>
