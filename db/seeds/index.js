@@ -2,7 +2,7 @@ const sequelize = require('../../config/connection');
 const seedUsers = require('./seed-users');
 const seedPosts = require('./seed-posts');
 const seedComments = require('./seed-comments');
-const seedVotes = require('./seed-votes');
+//const seedVotes = require('./seed-votes');
 
 const seedAll = async () => {
     try {
