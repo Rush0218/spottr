@@ -25,7 +25,7 @@
 {{#if posts.length}}
 <section>
     <h2>Your Posts</h2>
-    <ol>
+    <ul style="list-style: none;">
         {{#each posts as |post|}}
         <li>
             {{>post-info post}}
@@ -33,9 +33,9 @@
         </li>
         {{/each}}
 
-    </ol>
-    <script src="/javascript/upvote.js"></script>
-    <script src="/javascript/downvote.js"></script>
+    </ul>
+    <!--script src="/javascript/upvote.js"></script>
+    <script src="/javascript/downvote.js"></script-->
 </section>
 {{/if}}
 

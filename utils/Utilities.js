@@ -20,7 +20,8 @@ module.exports = {
         return date.toLocaleTimeString('en-US', { hour12: false });
     },
     format_date: (date) => {
+
         const rawDate = new Date(date);
-        return `[${rawDate.getMonth() + 1}/${rawDate.getDate()}/${rawDate.getFullYear()}]`;
+        return `[${rawDate.getMonth() + 1}/${rawDate.getDate()}/${rawDate.getFullYear()}] at ${rawDate.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' })}`;
     },
 };

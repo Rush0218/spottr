@@ -5,7 +5,8 @@ const { Vote } = require('.');
 
 class Post extends Model {
     //will need to put upvote/downvote functionality
-    async upvote(userId, postId) {
+    static async upvote(postId) {
+        console.log('Post.upvote');
         const upvote = await Vote.create({
             user_id: userId,
             positive: true,
@@ -13,7 +14,7 @@ class Post extends Model {
         });
         return upvote;
     }
-    async downvote(userId, postId) {
+    static async downvote(userId, postId) {
         const downvote = await Vote.create({
             user_id: userId,
             positive: false,
@@ -38,7 +39,8 @@ Post.init(
         },
         body: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            defaultValue: ''
         },
         postDate: {
             type: DataTypes.DATEONLY,

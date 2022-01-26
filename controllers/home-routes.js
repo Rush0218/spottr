@@ -9,26 +9,10 @@ router.get('/stylesheets/style.css', (req, res) => res.sendFile(path.join(__dirn
 router.get('/', (req, res) => {
     console.log(req.session);
     Post.findAll({
-        attributes: [
-            'id',
-            'post_url',
-            'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-        ],
+        order: [['created_at', 'DESC']],
         include: [
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
+            { model: Comment, include: { model: User } },
+            { model: User }
         ]
     })
         .then(dbPostData => {
@@ -59,26 +43,13 @@ router.get('/post/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: [
-            'id',
-            'post_url',
-            'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-        ],
         include: [
             {
                 model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
+                include: { model: User },
+                order: [['created_at', 'DESC']],
             },
-            {
-                model: User,
-                attributes: ['username']
-            }
+            { model: User, attributes: ['username'] }
         ]
     })
         .then(dbPostData => {

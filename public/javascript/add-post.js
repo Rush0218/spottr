@@ -18,12 +18,9 @@ async function newFormHandler(event) {
     });
     console.log('response', response);
     if (response.ok) {
-        document.location.reload();
+        document.location.replace('/dashboard');
     } else {
-        response.json().then(result => {
-            displayMessage('Post Failed', result.errors[0].type + ' on ' + result.errors[0].path)
-        })
-
+        displayMessage('Post Failed', 'Try again in a few minutes');
     }
 }
 

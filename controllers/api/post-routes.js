@@ -2,37 +2,18 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Post, User, Vote, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { Log } = require('../../utils/Utilities');
 
 
-// get all users
+// get all posts
 router.get('/', (req, res) => {
-    console.log('==================')
     Post.findAll({
-        attributes: [
-            'id',
-            'post_url',
-            'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-        ],
         order: [['created_at', 'DESC']],
-        include: [
-            // include the Comment model here:
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
+        include: [{ model: Comment, include: { model: User } }, { model: User, }]
     })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => {
+            res.json(dbPostData);
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -44,13 +25,6 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: [
-            'id',
-            'post_url',
-            'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-        ],
         include: [
             {
                 model: User,
@@ -79,25 +53,7 @@ router.post('/', withAuth, (req, res) => {
         body: req.body.body,
         user_id: req.session.user_id
     })
-        .then(dbPostData => {
-            const posts = [];
-            for (let index = 0; index < array.length; index++) {
-                const post = array[index];
-                const postVotes = Vote.findAll({
-                    where: {
-                        post_id: post.id
-                    }
-                }).then(votes => {
-                    const upvotes = votes.filter(vote => vote.positive)
-                    const downvotes = votes.filter(vote => !vote.positive)
-                    return { upvotes: upvotes, downvotes: downvotes }
-                });
-                posts.push({ post: post, votes: postVotes })
-            }
-            res.json(dbPostData)
-
-
-        })
+        .then(dbPostData => res.json(dbPostData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -105,8 +61,10 @@ router.post('/', withAuth, (req, res) => {
 });
 
 // PUT /api/posts/upvote
+/*
 router.put('/upvote', (req, res) => {
     // make sure the session exists first
+    console.log('req', req);
     const postId = req.body.post_id;
     const userId = 1;//req.session.user_id;
     if (req.session) {
@@ -144,7 +102,7 @@ router.put('/downvote', withAuth, (req, res) => {
 
     }
 });
-
+*/
 router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
