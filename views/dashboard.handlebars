@@ -1,10 +1,10 @@
 <!--create html for how the profile/dashboard will appear (it should include all of the users posts, a new post creator)-->
-<div class="has-background-grey">
+<div class="has-background-grey-darker">
     <div class="section has-text-white">
-        <form class="new-post-form section has-background-black" style="min-width: 100%;">
-            <h2 class="title has-text-white">Create New Post</h2>
+        <form class="new-post-form section has-background-grey" style="min-width: 100%;">
+            <h2 class="box title has-text-white has-background-grey-darker">Create New Post</h2>
             <br>
-            <label for="post-title">Title</label>
+            <label for="post-title" >Title</label>
             <input type="text" id="post-title" name="post-title" class="input" style="width: 100%" />
             <!--- added workout type --->
             <br>
@@ -27,14 +27,14 @@
             <textarea id="post-content" class="textarea" placeholder="Your Post Content" rows="10"></textarea>
             <br>
 
-            <button type="button" id="submitPost" class="button is-small has-background-info">
+            <button type="button" id="submitPost" class="button is-white is-small is-rounded is-outlined">
                 <strong>Publish</strong>
             </button>
 
         </form>
     </div>
-    <div class="section has-background-black">
-        <div class="section has-background-grey has-text-white">
+    <div class="section has-background-grey-darker">
+        <div class="section has-background-grey-darker has-text-white">
             {{#if posts.length}}
             <h2 class="title has-text-white ">Your Posts</h2>
             <ul>
