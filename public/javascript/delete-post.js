@@ -8,10 +8,12 @@ async function deleteFormHandler(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/dashboard/');
+        document.location.replace('/dashboard');
     } else {
-        alert(response.statusText);
+        displayMessage('Delete Post Failed', response.statusText);
     }
 }
 
-document.querySelector('.delete-post-btn').addEventListener('click', deleteFormHandler);
+setTimeout(() => {
+    document.querySelector('#delete-post').addEventListener('click', deleteFormHandler);
+}, 100);

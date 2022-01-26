@@ -44,6 +44,7 @@ router.post('/', withAuth, (req, res) => {
         title: req.body.title,
         post_url: req.body.post_url,
         content: req.body.content,
+        workout_type: req.body.workout_type,
         user_id: req.session.user_id
     })
         .then(dbPostData => res.json(dbPostData))
@@ -97,16 +98,7 @@ router.put('/downvote', withAuth, (req, res) => {
 });
 */
 router.put('/:id', withAuth, (req, res) => {
-    Post.update(
-        {
-            title: req.body.title
-        },
-        {
-            where: {
-                id: req.params.id
-            }
-        }
-    )
+    Post.update(req.body, { where: { id: req.params.id } })
         .then(dbPostData => {
             if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });
@@ -121,22 +113,27 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 router.delete('/:id', withAuth, (req, res) => {
-    Post.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: 'No post found with this id' });
-                return;
-            }
-            res.json(dbPostData);
-        })
+    const commentsDeleted = Comment.destroy({ where: { post_id: req.params.id } })
+        .then(dbPostData => { return true })
         .catch(err => {
-            console.log(err);
+            console.log(err.message);
             res.status(500).json(err);
+            return false;
         });
+    if (commentsDeleted != false) {
+        Post.destroy({ where: { id: req.params.id } })
+            .then(dbPostData => {
+                if (!dbPostData) {
+                    res.status(404).json({ message: 'No post found with this id' });
+                    return;
+                }
+                res.json(dbPostData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    }
 });
 
 module.exports = router; 

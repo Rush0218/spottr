@@ -10,7 +10,7 @@ async function upvote(event) {
                 const response = await fetch('/api/posts/upvote', {
                     method: 'PUT',
                     body: JSON.stringify(postId),
-                    headers: { 'Content Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json' },
                 })
                     .then(response => response.json())
                     .catch(err => console.log('err', err));
