@@ -18,7 +18,7 @@
 
 ## Description
 
-Full-stack blog site for Exercise Enthusiasts.
+Collaborative, full-stack blog site for Exercise Enthusiasts.
 
 
 ## Installation 
